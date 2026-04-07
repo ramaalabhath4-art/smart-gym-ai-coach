@@ -1,0 +1,708 @@
+{
+  "exercises": [
+    {
+      "id": 1,
+      "name": "barbell biceps curl",
+      "category": "arms",
+      "muscles_primary": ["biceps", "brachialis"],
+      "muscles_secondary": ["forearms", "brachioradialis"],
+      "equipment": ["barbell"],
+      "difficulty": "beginner",
+      "calories_per_10min": 40,
+      "description": "A fundamental exercise for building bicep muscle using a barbell. Develops strength and size of the front arm muscle.",
+      "how_to": [
+        "Stand straight, grip barbell shoulder-width apart, palms facing up",
+        "Keep elbows fixed at sides throughout the movement",
+        "Curl barbell toward shoulders while exhaling",
+        "Lower barbell slowly while inhaling",
+        "Repeat while keeping body completely stable"
+      ],
+      "common_mistakes": [
+        "Moving elbows forward or backward during the curl",
+        "Using back or shoulders to swing the weight up",
+        "Lowering weight too quickly without control",
+        "Not completing full range of motion",
+        "Using too much weight that affects form"
+      ],
+      "tips": {
+        "beginner": "Start with light weight and focus on correct form before increasing weight",
+        "intermediate": "Try varying movement speed — slow on the lowering phase for more muscle tension",
+        "advanced": "Add drop sets or superset with tricep exercises for maximum pump"
+      },
+      "safety": "Avoid shrugging shoulders during exercise. Stop if you feel elbow pain.",
+      "complementary_exercises": ["hammer curl", "incline bench press", "pull up"],
+      "youtube_url": "https://www.youtube.com/embed/kwG2ipFQV0w"
+    },
+    {
+      "id": 2,
+      "name": "bench press",
+      "category": "chest",
+      "muscles_primary": ["pectoralis major", "chest"],
+      "muscles_secondary": ["triceps", "anterior deltoid"],
+      "equipment": ["barbell", "bench"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 60,
+      "description": "The king exercise for building chest muscles. Develops comprehensive chest strength and size.",
+      "how_to": [
+        "Lie flat on bench with feet flat on floor",
+        "Grip barbell slightly wider than shoulder-width",
+        "Lower barbell slowly to mid-chest with control",
+        "Press barbell up powerfully while exhaling",
+        "Maintain natural arch in back throughout movement"
+      ],
+      "common_mistakes": [
+        "Lifting feet off the floor during the press",
+        "Bouncing barbell off chest instead of controlled touch",
+        "Fully locking elbows at the top position",
+        "Shoulders not staying pinned on bench",
+        "Using excessive weight that loses control"
+      ],
+      "tips": {
+        "beginner": "Start with empty barbell to learn correct movement pattern",
+        "intermediate": "Focus on pressing with chest muscles not arms",
+        "advanced": "Add dumbbell variations to develop all chest areas"
+      },
+      "safety": "Use a spotter when lifting heavy weights. Do not wrap thumbs under barbell.",
+      "complementary_exercises": ["incline bench press", "decline bench press", "chest fly machine"],
+      "youtube_url": "https://www.youtube.com/embed/rT7DgCr-3pg"
+    },
+    {
+      "id": 3,
+      "name": "chest fly machine",
+      "category": "chest",
+      "muscles_primary": ["pectoralis major", "chest"],
+      "muscles_secondary": ["anterior deltoid"],
+      "equipment": ["machine"],
+      "difficulty": "beginner",
+      "calories_per_10min": 40,
+      "description": "Excellent isolation exercise for chest muscle using the fly machine. Ideal for beginners and as a finishing exercise.",
+      "how_to": [
+        "Sit on machine with back straight against pad",
+        "Place forearms on side pads at chest height",
+        "Press arms forward until they meet in center",
+        "Return slowly to starting position with control",
+        "Keep slight bend in elbows throughout movement"
+      ],
+      "common_mistakes": [
+        "Fully locking elbows at the end position",
+        "Using shoulders instead of chest to drive movement",
+        "Moving too fast without control",
+        "Using excessive weight beyond capability"
+      ],
+      "tips": {
+        "beginner": "Focus on feeling the chest muscle squeeze in each rep",
+        "intermediate": "Try pausing for a second at maximum squeeze position",
+        "advanced": "Use as finishing exercise after heavy barbell press"
+      },
+      "safety": "Avoid excessive backward range to prevent shoulder strain.",
+      "complementary_exercises": ["bench press", "incline bench press", "push-up"],
+      "youtube_url": "https://www.youtube.com/embed/4Y2gMKx-2mU"
+    },
+    {
+      "id": 4,
+      "name": "deadlift",
+      "category": "full body",
+      "muscles_primary": ["back", "glutes", "hamstrings"],
+      "muscles_secondary": ["core", "traps", "forearms"],
+      "equipment": ["barbell"],
+      "difficulty": "advanced",
+      "calories_per_10min": 90,
+      "description": "The king of all exercises. Works most body muscles and builds overall strength. One of the most powerful muscle building exercises.",
+      "how_to": [
+        "Stand in front of barbell with feet shoulder-width apart",
+        "Bend and grip barbell with hands just outside knees",
+        "Keep back straight, chest up, and core braced",
+        "Lift barbell by pushing the floor away with your feet",
+        "Complete the lift until standing fully straight and tall"
+      ],
+      "common_mistakes": [
+        "Rounding the back during the lift — very dangerous",
+        "Hips rising before shoulders at the start",
+        "Allowing barbell to drift away from body",
+        "Locking knees completely at the very start",
+        "Looking up excessively straining the neck"
+      ],
+      "tips": {
+        "beginner": "Learn the movement with very light weight or no weight first",
+        "intermediate": "Focus on engaging core muscles before initiating the lift",
+        "advanced": "Try different techniques: sumo stance or conventional stance"
+      },
+      "safety": "This is an advanced exercise. Learn it with a qualified trainer. Stop immediately at any back pain.",
+      "complementary_exercises": ["romanian deadlift", "squat", "t bar row"],
+      "youtube_url": "https://www.youtube.com/embed/r4MzxtBKyNE"
+    },
+    {
+      "id": 5,
+      "name": "decline bench press",
+      "category": "chest",
+      "muscles_primary": ["lower chest", "pectoralis major"],
+      "muscles_secondary": ["triceps", "anterior deltoid"],
+      "equipment": ["barbell", "decline bench"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 55,
+      "description": "Specialized exercise for developing the lower chest. Gives a defined and distinctive shape to the chest.",
+      "how_to": [
+        "Lie on decline bench and secure feet under pads",
+        "Grip barbell wider than shoulder-width",
+        "Lower barbell toward lower chest with control",
+        "Press barbell up powerfully while exhaling",
+        "Keep shoulders stable and pinned throughout"
+      ],
+      "common_mistakes": [
+        "Not properly securing feet before starting",
+        "Excessive decline angle beyond 30 degrees",
+        "Bouncing barbell off chest instead of controlled touch"
+      ],
+      "tips": {
+        "beginner": "Start with a gentle decline angle around 15 degrees",
+        "intermediate": "Focus on squeezing the lower chest during contraction",
+        "advanced": "Alternate between dumbbells and barbell for variety"
+      },
+      "safety": "Make sure your feet are well secured before lifting to avoid slipping.",
+      "complementary_exercises": ["bench press", "incline bench press", "chest fly machine"],
+      "youtube_url": "https://www.youtube.com/embed/UGcjyq9Gu8s"
+    },
+    {
+      "id": 6,
+      "name": "hammer curl",
+      "category": "arms",
+      "muscles_primary": ["brachialis", "biceps"],
+      "muscles_secondary": ["forearms", "brachioradialis"],
+      "equipment": ["dumbbell"],
+      "difficulty": "beginner",
+      "calories_per_10min": 35,
+      "description": "Excellent exercise targeting the brachialis muscle and forearm. Gives thickness and depth to the overall arm.",
+      "how_to": [
+        "Stand straight holding a dumbbell in each hand",
+        "Palms in neutral position facing each other",
+        "Curl dumbbell toward shoulder keeping elbow fixed at side",
+        "Lower slowly to starting position with control",
+        "Repeat alternating arms or both simultaneously"
+      ],
+      "common_mistakes": [
+        "Rotating wrist during the curl motion",
+        "Moving elbows forward away from sides",
+        "Using body momentum instead of muscle strength"
+      ],
+      "tips": {
+        "beginner": "Start with light dumbbell and focus on feeling the muscle",
+        "intermediate": "Try alternating hands for better individual focus",
+        "advanced": "Add a hard squeeze technique at the top position"
+      },
+      "safety": "Keep your wrist straight and neutral throughout the entire movement.",
+      "complementary_exercises": ["barbell biceps curl", "lat pulldown", "pull up"],
+      "youtube_url": "https://www.youtube.com/embed/CFPM-Gj8kmI"
+    },
+    {
+      "id": 7,
+      "name": "hip thrust",
+      "category": "glutes",
+      "muscles_primary": ["gluteus maximus", "glutes"],
+      "muscles_secondary": ["hamstrings", "core"],
+      "equipment": ["barbell", "bench"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 50,
+      "description": "Best exercise for building glute muscles. Gives fast and noticeable results in glute shape and strength.",
+      "how_to": [
+        "Sit on floor with upper back against bench edge",
+        "Place barbell across hips with protective pad",
+        "Position feet flat on floor at 90-degree knee angle",
+        "Drive hips upward by powerfully squeezing glutes",
+        "Hold at top for one second then lower slowly"
+      ],
+      "common_mistakes": [
+        "Not squeezing glutes hard at the top position",
+        "Raising the back instead of driving the hips up",
+        "Feet placed too far or too close to body",
+        "Looking forward instead of keeping neutral neck"
+      ],
+      "tips": {
+        "beginner": "Start without weight to master the correct movement pattern",
+        "intermediate": "Focus on feeling the glutes contract — not the back",
+        "advanced": "Add resistance band above knees for extra glute activation"
+      },
+      "safety": "Always use a protective pad between barbell and hips to avoid injury.",
+      "complementary_exercises": ["squat", "romanian deadlift", "leg raises"],
+      "youtube_url": "https://www.youtube.com/embed/Jbcvn6-Bbsg"
+    },
+    {
+      "id": 8,
+      "name": "incline bench press",
+      "category": "chest",
+      "muscles_primary": ["upper chest", "clavicular head"],
+      "muscles_secondary": ["anterior deltoid", "triceps"],
+      "equipment": ["barbell", "incline bench"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 55,
+      "description": "Specialized exercise for developing the upper chest. Gives fullness and elevation to the upper chest area.",
+      "how_to": [
+        "Set bench angle between 30 and 45 degrees",
+        "Lie back and grip barbell at shoulder-width",
+        "Lower barbell to upper chest with full control",
+        "Press barbell up powerfully while exhaling",
+        "Keep shoulder blades retracted back and down"
+      ],
+      "common_mistakes": [
+        "Too steep angle converting it into a shoulder exercise",
+        "Lifting buttocks off the bench during press",
+        "Fully locking elbows at the top position"
+      ],
+      "tips": {
+        "beginner": "Start at 30-degree angle with light weight to learn form",
+        "intermediate": "Focus on feeling the upper chest — not shoulders",
+        "advanced": "Try dumbbells for greater range of motion and stretch"
+      },
+      "safety": "Do not use angle more than 45 degrees to avoid excessive shoulder strain.",
+      "complementary_exercises": ["bench press", "chest fly machine", "push-up"],
+      "youtube_url": "https://www.youtube.com/embed/SrqOu55AS9E"
+    },
+    {
+      "id": 9,
+      "name": "lat pulldown",
+      "category": "back",
+      "muscles_primary": ["latissimus dorsi", "lats"],
+      "muscles_secondary": ["biceps", "rear deltoid", "rhomboids"],
+      "equipment": ["cable", "machine"],
+      "difficulty": "beginner",
+      "calories_per_10min": 50,
+      "description": "Fundamental exercise for developing back width. Works the latissimus dorsi and gives the body a V-shape.",
+      "how_to": [
+        "Sit at machine and secure thighs firmly under pad",
+        "Grip bar wider than shoulder-width with overhand grip",
+        "Pull bar down toward upper chest while leaning slightly back",
+        "Hold for one second squeezing shoulder blades down and together",
+        "Return bar slowly upward with full control"
+      ],
+      "common_mistakes": [
+        "Pulling bar behind the head — dangerous for neck and shoulders",
+        "Using body momentum and excessive backward lean",
+        "Not squeezing shoulder blades at the bottom",
+        "Using a grip that is too narrow"
+      ],
+      "tips": {
+        "beginner": "Start with weight allowing 12 clean reps with good form",
+        "intermediate": "Think about pulling your elbows down — not your hands",
+        "advanced": "Try different grips: wide, narrow, neutral, underhand"
+      },
+      "safety": "Never pull bar behind the head — it causes serious neck and shoulder damage.",
+      "complementary_exercises": ["pull up", "t bar row", "deadlift"],
+      "youtube_url": "https://www.youtube.com/embed/JMe-_eYZvB4"
+    },
+    {
+      "id": 10,
+      "name": "lateral raise",
+      "category": "shoulders",
+      "muscles_primary": ["lateral deltoid", "medial deltoid"],
+      "muscles_secondary": ["supraspinatus", "upper traps"],
+      "equipment": ["dumbbell"],
+      "difficulty": "beginner",
+      "calories_per_10min": 35,
+      "description": "Optimal exercise for developing shoulder width. Gives the round and wide shoulder appearance.",
+      "how_to": [
+        "Stand straight holding a dumbbell in each hand at sides",
+        "Keep slight bend in elbows throughout the movement",
+        "Raise arms out to sides until at shoulder level",
+        "Hold for one second at top then lower slowly",
+        "Imagine pouring water from a glass as you raise"
+      ],
+      "common_mistakes": [
+        "Shrugging shoulders upward during the movement",
+        "Using body momentum and swinging the weights",
+        "Raising arms above shoulder level",
+        "Using too much weight that causes loss of control"
+      ],
+      "tips": {
+        "beginner": "Start with very light dumbbells — 2 to 3 kilograms",
+        "intermediate": "Focus on keeping shoulders depressed and down",
+        "advanced": "Try extended pause technique at mid-movement position"
+      },
+      "safety": "Never raise above shoulder level to avoid shoulder joint impingement.",
+      "complementary_exercises": ["shoulder press", "bench press", "pull up"],
+      "youtube_url": "https://www.youtube.com/embed/q0R4V-f5Fcg"
+    },
+    {
+      "id": 11,
+      "name": "leg extension",
+      "category": "legs",
+      "muscles_primary": ["quadriceps", "rectus femoris"],
+      "muscles_secondary": ["vastus lateralis", "vastus medialis"],
+      "equipment": ["machine"],
+      "difficulty": "beginner",
+      "calories_per_10min": 40,
+      "description": "Excellent isolation exercise for quadriceps. Ideal for strengthening knee and shaping the front thigh.",
+      "how_to": [
+        "Sit on machine with back straight against pad",
+        "Place lower legs behind the ankle pad",
+        "Extend legs forward until fully straight",
+        "Hold at top for one second squeezing quads",
+        "Lower slowly with full control — do not drop"
+      ],
+      "common_mistakes": [
+        "Using momentum and jerking the weight up",
+        "Lifting buttocks off the seat during extension",
+        "Using too much weight that stresses the knee joint"
+      ],
+      "tips": {
+        "beginner": "Focus on feeling the quadriceps contract in each rep",
+        "intermediate": "Try a 2-second pause at the fully extended top position",
+        "advanced": "Use as a finishing exercise after heavy squats"
+      },
+      "safety": "Avoid excessive weights to protect the knee joint from injury.",
+      "complementary_exercises": ["squat", "romanian deadlift", "leg raises"],
+      "youtube_url": "https://www.youtube.com/embed/YyvSfVjQeL4"
+    },
+    {
+      "id": 12,
+      "name": "leg raises",
+      "category": "core",
+      "muscles_primary": ["lower abs", "hip flexors"],
+      "muscles_secondary": ["rectus abdominis", "obliques"],
+      "equipment": ["no equipment"],
+      "difficulty": "beginner",
+      "calories_per_10min": 35,
+      "description": "Excellent exercise for strengthening lower abs and hip muscles. Can be performed anywhere with no equipment.",
+      "how_to": [
+        "Lie flat on back with hands placed under glutes for support",
+        "Raise both straight legs upward to 90 degrees",
+        "Lower legs slowly without letting them touch the ground",
+        "Keep lower back pressed firmly into the floor always",
+        "Breathe regularly — exhale going up, inhale going down"
+      ],
+      "common_mistakes": [
+        "Allowing lower back to arch off the floor",
+        "Bending knees too much reducing effectiveness",
+        "Using fast momentum swinging legs up",
+        "Holding breath during the movement"
+      ],
+      "tips": {
+        "beginner": "Start with bent knees if straight legs are too difficult",
+        "intermediate": "Add a pause just above the floor without touching",
+        "advanced": "Try hanging leg raises from a pull-up bar"
+      },
+      "safety": "Always keep lower back pressed to floor to protect the spine.",
+      "complementary_exercises": ["plank", "russian twist", "hip thrust"],
+      "youtube_url": "https://www.youtube.com/embed/jEy_czNXAqw"
+    },
+    {
+      "id": 13,
+      "name": "plank",
+      "category": "core",
+      "muscles_primary": ["core", "transverse abdominis"],
+      "muscles_secondary": ["shoulders", "glutes", "back"],
+      "equipment": ["no equipment"],
+      "difficulty": "beginner",
+      "calories_per_10min": 30,
+      "description": "Fundamental stability exercise. Strengthens the entire core and improves posture and overall body balance.",
+      "how_to": [
+        "Place elbows on floor directly below shoulders",
+        "Raise body on forearms and toes forming a straight line",
+        "Keep body perfectly straight like a wooden plank",
+        "Tighten abs and glutes throughout the hold",
+        "Look at the floor and breathe steadily and regularly"
+      ],
+      "common_mistakes": [
+        "Raising hips too high forming an inverted V shape",
+        "Sagging hips down toward the floor",
+        "Holding breath during the exercise",
+        "Looking forward and straining the neck"
+      ],
+      "tips": {
+        "beginner": "Start with 20 seconds and increase duration gradually each week",
+        "intermediate": "Try side plank for an additional core challenge",
+        "advanced": "Add leg or arm lifts for increased difficulty"
+      },
+      "safety": "Stop immediately if you feel sharp lower back pain during the hold.",
+      "complementary_exercises": ["leg raises", "russian twist", "push-up"],
+      "youtube_url": "https://www.youtube.com/embed/pSHjTRCQxIw"
+    },
+    {
+      "id": 14,
+      "name": "pull up",
+      "category": "back",
+      "muscles_primary": ["latissimus dorsi", "lats"],
+      "muscles_secondary": ["biceps", "rear deltoid", "core"],
+      "equipment": ["pull up bar"],
+      "difficulty": "advanced",
+      "calories_per_10min": 70,
+      "description": "One of the hardest and best bodyweight exercises for building back width and overall upper body strength.",
+      "how_to": [
+        "Grip bar with hands wider than shoulder-width, palms facing away",
+        "Start from a dead hang with arms fully extended",
+        "Pull body upward until chin clears the bar",
+        "Lower yourself slowly back to dead hang position",
+        "Keep shoulder blades depressed down throughout"
+      ],
+      "common_mistakes": [
+        "Not starting from fully dead hang extended position",
+        "Using kipping momentum and swinging",
+        "Not pulling high enough to get chin above bar",
+        "Dropping down quickly without eccentric control"
+      ],
+      "tips": {
+        "beginner": "Start with assisted pull-ups or resistance band support",
+        "intermediate": "Think about pulling your elbows toward your hips",
+        "advanced": "Add a weight belt with plates for progressive overload"
+      },
+      "safety": "Do not kip or swing to avoid serious shoulder and neck strain.",
+      "complementary_exercises": ["lat pulldown", "t bar row", "barbell biceps curl"],
+      "youtube_url": "https://www.youtube.com/embed/eYgyApVxHrA"
+    },
+    {
+      "id": 15,
+      "name": "push-up",
+      "category": "chest",
+      "muscles_primary": ["pectoralis major", "chest"],
+      "muscles_secondary": ["triceps", "anterior deltoid", "core"],
+      "equipment": ["no equipment"],
+      "difficulty": "beginner",
+      "calories_per_10min": 45,
+      "description": "The classic fundamental bodyweight exercise. Works chest, triceps and front shoulder. Can be done anywhere.",
+      "how_to": [
+        "Place hands on floor slightly wider than shoulder-width",
+        "Form a straight body line from head to heels on toes",
+        "Lower chest toward the floor by bending elbows",
+        "Push back up to starting position by pressing into floor",
+        "Keep core and glutes tight throughout entire movement"
+      ],
+      "common_mistakes": [
+        "Sagging hips down or raising buttocks up too high",
+        "Not lowering chest close enough to the floor",
+        "Placing hands too close together reducing chest work",
+        "Holding breath during the pushing phase"
+      ],
+      "tips": {
+        "beginner": "Start with knee push-ups if standard version is too difficult",
+        "intermediate": "Try diamond push-ups to target triceps more",
+        "advanced": "Progress to clapping push-ups or single arm variations"
+      },
+      "safety": "Keep body perfectly straight throughout to protect the lower back.",
+      "complementary_exercises": ["bench press", "plank", "tricep dips"],
+      "youtube_url": "https://www.youtube.com/embed/IODxDxX7oi4"
+    },
+    {
+      "id": 16,
+      "name": "romanian deadlift",
+      "category": "legs",
+      "muscles_primary": ["hamstrings", "glutes"],
+      "muscles_secondary": ["lower back", "core"],
+      "equipment": ["barbell", "dumbbell"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 65,
+      "description": "Excellent exercise for hamstrings and glutes. Causes less lower back strain than the conventional deadlift.",
+      "how_to": [
+        "Stand straight holding barbell at hip level in front",
+        "Maintain a slight bend in knees throughout movement",
+        "Hinge at hips pushing them backward while keeping back straight",
+        "Lower barbell along the front of your legs slowly",
+        "Drive hips forward squeezing glutes to return to start"
+      ],
+      "common_mistakes": [
+        "Rounding the lower back during the hinge",
+        "Bending knees too much making it a squat",
+        "Allowing barbell to drift far away from the legs",
+        "Going lower than your flexibility comfortably allows"
+      ],
+      "tips": {
+        "beginner": "Start with dumbbells to learn the hip hinge pattern",
+        "intermediate": "Focus on feeling the hamstring stretch at the bottom",
+        "advanced": "Add a pause at the bottom position for increased tension"
+      },
+      "safety": "Stop immediately at any sharp or sudden lower back pain.",
+      "complementary_exercises": ["deadlift", "hip thrust", "leg extension"],
+      "youtube_url": "https://www.youtube.com/embed/2SHsk9AzdjA"
+    },
+    {
+      "id": 17,
+      "name": "russian twist",
+      "category": "core",
+      "muscles_primary": ["obliques", "transverse abdominis"],
+      "muscles_secondary": ["rectus abdominis", "hip flexors"],
+      "equipment": ["no equipment", "dumbbell"],
+      "difficulty": "beginner",
+      "calories_per_10min": 45,
+      "description": "Excellent exercise for obliques and reducing waist fat. Also improves rotational balance and coordination.",
+      "how_to": [
+        "Sit on floor leaning back at approximately 45-degree angle",
+        "Lift feet off the floor for increased difficulty",
+        "Rotate torso to the right then to the left",
+        "Touch the floor beside each hip with both hands",
+        "Keep back straight and core braced throughout"
+      ],
+      "common_mistakes": [
+        "Rotating only the shoulders instead of the entire torso",
+        "Keeping feet on the floor making it too easy",
+        "Moving too fast sacrificing control for speed",
+        "Collapsing the lower back during the exercise"
+      ],
+      "tips": {
+        "beginner": "Start with feet flat on floor for easier version",
+        "intermediate": "Add a light dumbbell for extra resistance",
+        "advanced": "Increase rotation speed while maintaining perfect form"
+      },
+      "safety": "If you feel lower back pain, place feet back on the floor.",
+      "complementary_exercises": ["plank", "leg raises", "hip thrust"],
+      "youtube_url": "https://www.youtube.com/embed/1m8-IKzMwqI"
+    },
+    {
+      "id": 18,
+      "name": "shoulder press",
+      "category": "shoulders",
+      "muscles_primary": ["deltoid", "anterior deltoid"],
+      "muscles_secondary": ["triceps", "upper traps", "core"],
+      "equipment": ["barbell", "dumbbell"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 55,
+      "description": "Fundamental exercise for building strong rounded shoulders. Develops comprehensive shoulder strength and size.",
+      "how_to": [
+        "Sit or stand with back straight and core engaged",
+        "Hold barbell or dumbbells at shoulder level",
+        "Press weight straight overhead until arms are fully extended",
+        "Lower slowly back to shoulder level with control",
+        "Keep core tight throughout to protect the spine"
+      ],
+      "common_mistakes": [
+        "Excessive backward arch in the lower back",
+        "Not lowering weight below ear level on each rep",
+        "Using leg drive momentum to initiate the press",
+        "Fully locking elbows at the overhead position"
+      ],
+      "tips": {
+        "beginner": "Start with dumbbells to address any strength imbalance",
+        "intermediate": "Try alternating press — one arm at a time",
+        "advanced": "Add push press technique using slight leg assist"
+      },
+      "safety": "Never press behind the head — it causes serious shoulder and neck strain.",
+      "complementary_exercises": ["lateral raise", "bench press", "tricep pushdown"],
+      "youtube_url": "https://www.youtube.com/embed/2yjwXTZQDDY"
+    },
+    {
+      "id": 19,
+      "name": "squat",
+      "category": "legs",
+      "muscles_primary": ["quadriceps", "glutes"],
+      "muscles_secondary": ["hamstrings", "core", "calves"],
+      "equipment": ["no equipment", "barbell"],
+      "difficulty": "beginner",
+      "calories_per_10min": 80,
+      "description": "The queen of leg exercises. Works most lower body muscles and builds comprehensive lower body strength.",
+      "how_to": [
+        "Stand with feet shoulder-width apart or slightly wider",
+        "Point toes slightly outward at comfortable angle",
+        "Lower body as if sitting back into an invisible chair",
+        "Keep back straight, chest up, and knees tracking over toes",
+        "Drive through heels to return to standing position"
+      ],
+      "common_mistakes": [
+        "Knees caving inward — the most common squat error",
+        "Heels lifting off the floor during the descent",
+        "Rounding the lower back at the bottom",
+        "Not squatting deep enough — less than 90 degrees",
+        "Looking down at the floor instead of forward"
+      ],
+      "tips": {
+        "beginner": "Start with wall squats to learn the correct position",
+        "intermediate": "Add barbell gradually starting with just the bar",
+        "advanced": "Try front squat or deep squat variations"
+      },
+      "safety": "Ensure knees stay aligned over toes in every single rep.",
+      "complementary_exercises": ["leg extension", "romanian deadlift", "hip thrust"],
+      "youtube_url": "https://www.youtube.com/embed/Dy28eq2PjZM"
+    },
+    {
+      "id": 20,
+      "name": "t bar row",
+      "category": "back",
+      "muscles_primary": ["middle back", "rhomboids", "lats"],
+      "muscles_secondary": ["biceps", "rear deltoid", "traps"],
+      "equipment": ["barbell", "cable"],
+      "difficulty": "intermediate",
+      "calories_per_10min": 60,
+      "description": "Excellent exercise for building back thickness and depth. Works the middle back area in a unique and effective way.",
+      "how_to": [
+        "Place barbell in a corner or use dedicated T-bar machine",
+        "Bend forward at approximately 45-degree angle from hips",
+        "Grip the handle with both hands underneath",
+        "Pull handle toward lower chest squeezing shoulder blades",
+        "Return slowly to full extension with complete control"
+      ],
+      "common_mistakes": [
+        "Too much or too little forward lean from hips",
+        "Using momentum and jerking the weight up",
+        "Not squeezing shoulder blades at the contracted position",
+        "Raising the head excessively straining the neck"
+      ],
+      "tips": {
+        "beginner": "Start light to learn the correct bent-over position",
+        "intermediate": "Think about pulling your elbows — not your hands",
+        "advanced": "Try different handle grips to target different areas"
+      },
+      "safety": "Keep back straight and neutral throughout the entire exercise.",
+      "complementary_exercises": ["lat pulldown", "pull up", "deadlift"],
+      "youtube_url": "https://www.youtube.com/embed/6EghH8jNgr8"
+    },
+    {
+      "id": 21,
+      "name": "tricep pushdown",
+      "category": "arms",
+      "muscles_primary": ["triceps"],
+      "muscles_secondary": ["forearms"],
+      "equipment": ["cable"],
+      "difficulty": "beginner",
+      "calories_per_10min": 35,
+      "description": "Excellent isolation exercise for the triceps muscle. Gives great definition and size to the back of the arm.",
+      "how_to": [
+        "Stand facing cable machine and grip bar or rope attachment",
+        "Keep elbows pinned at sides and slightly bent at start",
+        "Push attachment downward until arms are fully extended",
+        "Hold for one second squeezing triceps hard",
+        "Return slowly upward to starting position with control"
+      ],
+      "common_mistakes": [
+        "Allowing elbows to move forward and away from sides",
+        "Using entire body to swing the weight down",
+        "Moving too fast with momentum instead of control",
+        "Not completing the full range of downward extension"
+      ],
+      "tips": {
+        "beginner": "Start with the rope attachment for better range of motion",
+        "intermediate": "Try reverse grip for a different muscle angle",
+        "advanced": "Superset immediately with bicep curls for arm pump"
+      },
+      "safety": "Keep elbows fixed at sides — they are the only pivot point in this movement.",
+      "complementary_exercises": ["tricep dips", "bench press", "shoulder press"],
+      "youtube_url": "https://www.youtube.com/embed/2-LAMcUuEQo"
+    },
+    {
+      "id": 22,
+      "name": "tricep dips",
+      "category": "arms",
+      "muscles_primary": ["triceps"],
+      "muscles_secondary": ["chest", "anterior deltoid"],
+      "equipment": ["bench", "parallel bars"],
+      "difficulty": "beginner",
+      "calories_per_10min": 50,
+      "description": "Best bodyweight exercise for triceps. Can be performed on a bench or parallel bars with no special equipment.",
+      "how_to": [
+        "Place hands on bench edge directly behind hips",
+        "Extend legs forward or keep them bent for easier version",
+        "Lower body downward by bending elbows to 90 degrees",
+        "Push back up to starting position by extending arms",
+        "Keep body close to the bench throughout movement"
+      ],
+      "common_mistakes": [
+        "Moving too far away from the bench during dips",
+        "Not lowering deep enough to work the triceps fully",
+        "Shrugging shoulders upward during the movement",
+        "Moving too fast without controlling the descent"
+      ],
+      "tips": {
+        "beginner": "Keep legs bent to reduce bodyweight difficulty",
+        "intermediate": "Extend legs fully forward for increased challenge",
+        "advanced": "Add weight plate on thighs for progressive overload"
+      },
+      "safety": "Stop immediately at any shoulder pain — it indicates excessive strain.",
+      "complementary_exercises": ["tricep pushdown", "bench press", "push-up"],
+      "youtube_url": "https://www.youtube.com/embed/0326dy_-DgE"
+    }
+  ]
+}

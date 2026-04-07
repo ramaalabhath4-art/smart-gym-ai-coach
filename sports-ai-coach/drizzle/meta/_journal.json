@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1773348317451,
+      "tag": "0000_large_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1773834481749,
+      "tag": "0001_bitter_mulholland_black",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1775109236315,
+      "tag": "0002_hot_purifiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1775191646569,
+      "tag": "0003_motionless_sentinels",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1775204772422,
+      "tag": "0004_bouncy_namora",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1775211948409,
+      "tag": "0005_wonderful_hellfire_club",
+      "breakpoints": true
+    }
+  ]
+}
