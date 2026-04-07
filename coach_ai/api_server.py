@@ -6,6 +6,7 @@ Place this file in D:\coach_ai_completenew\coach_ai
 import os
 import sys
 import json
+import threading
 import tempfile
 import traceback
 from dotenv import load_dotenv
@@ -28,27 +29,59 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     return response
 
-# ================== LOAD MODELS ==================
-print("🔄 Loading models...")
-try:
-    from predict_final import predict_video, sample_frames
-    from recommend import get_recommendations, EXERCISES_DB, LANG
-    print("✅ Models loaded successfully!")
-    MODELS_LOADED = True
-except Exception as e:
-    print(f"⚠️  Could not load models: {e}")
-    traceback.print_exc()
-    MODELS_LOADED = False
+# ================== LAZY MODEL LOADING ==================
+# Models are NOT loaded at startup — they load on first request.
+# This prevents OOM during gunicorn startup on low-memory servers.
 
-# ================== LOAD RAG ==================
-print("🔄 Loading RAG system...")
-try:
-    from coach_chat import chat_with_analysis, chat_general
-    RAG_LOADED = True
-    print("✅ RAG system loaded!")
-except Exception as e:
-    print(f"⚠️  RAG not loaded: {e}")
-    RAG_LOADED = False
+_models_lock = threading.Lock()
+_rag_lock    = threading.Lock()
+
+_predict_video  = None
+_sample_frames  = None
+_MODELS_LOADED  = False
+_MODELS_ERROR   = None
+
+_chat_with_analysis = None
+_chat_general       = None
+_RAG_LOADED         = False
+_RAG_ERROR          = None
+
+
+def _load_models():
+    global _predict_video, _sample_frames, _MODELS_LOADED, _MODELS_ERROR
+    with _models_lock:
+        if _MODELS_LOADED or _MODELS_ERROR:
+            return
+        try:
+            print("🔄 Loading ML models (first request)...")
+            from predict_final import predict_video, sample_frames
+            _predict_video = predict_video
+            _sample_frames = sample_frames
+            _MODELS_LOADED = True
+            print("✅ ML models loaded!")
+        except Exception as e:
+            _MODELS_ERROR = str(e)
+            print(f"⚠️  Could not load ML models: {e}")
+            traceback.print_exc()
+
+
+def _load_rag():
+    global _chat_with_analysis, _chat_general, _RAG_LOADED, _RAG_ERROR
+    with _rag_lock:
+        if _RAG_LOADED or _RAG_ERROR:
+            return
+        try:
+            print("🔄 Loading RAG system (first request)...")
+            from coach_chat import chat_with_analysis, chat_general
+            _chat_with_analysis = chat_with_analysis
+            _chat_general       = chat_general
+            _RAG_LOADED         = True
+            print("✅ RAG system loaded!")
+        except Exception as e:
+            _RAG_ERROR = str(e)
+            print(f"⚠️  RAG not loaded: {e}")
+            traceback.print_exc()
+
 
 # ================== ENDPOINTS ==================
 
@@ -56,9 +89,27 @@ except Exception as e:
 def health():
     return jsonify({
         "status":        "ok",
-        "models_loaded": MODELS_LOADED,
-        "rag_loaded":    RAG_LOADED,
+        "models_loaded": _MODELS_LOADED,
+        "rag_loaded":    _RAG_LOADED,
+        "models_error":  _MODELS_ERROR,
+        "rag_error":     _RAG_ERROR,
         "service":       "Smart Gym AI API",
+    })
+
+
+@app.route("/api/warmup", methods=["GET"])
+def warmup():
+    """
+    Call this endpoint once after deploy to trigger model loading.
+    GET /api/warmup
+    """
+    _load_models()
+    _load_rag()
+    return jsonify({
+        "models_loaded": _MODELS_LOADED,
+        "rag_loaded":    _RAG_LOADED,
+        "models_error":  _MODELS_ERROR,
+        "rag_error":     _RAG_ERROR,
     })
 
 
@@ -68,8 +119,10 @@ def analyze():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
-    if not MODELS_LOADED:
-        return jsonify({"error": "Models not loaded"}), 500
+    _load_models()
+
+    if not _MODELS_LOADED:
+        return jsonify({"error": f"Models not loaded: {_MODELS_ERROR}"}), 500
 
     if "video" not in request.files:
         return jsonify({"error": "No video file uploaded"}), 400
@@ -96,14 +149,13 @@ def analyze():
             if result.returncode == 0:
                 os.unlink(tmp_path)
                 tmp_path = mp4_path
-            # If ffmpeg fails, try with cv2 directly
         except Exception as e:
             print(f"[ffmpeg] not available, trying directly: {e}")
 
     try:
         source = request.args.get("source", request.form.get("source", "upload"))
         print(f"  [API] source={source}")
-        result = predict_video(tmp_path, source=source)
+        result = _predict_video(tmp_path, source=source)
         os.unlink(tmp_path)
 
         if "error" in result:
@@ -135,7 +187,9 @@ def chat():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
-    if not RAG_LOADED:
+    _load_rag()
+
+    if not _RAG_LOADED:
         return jsonify({
             "message": "RAG system not loaded. Please install: pip install langchain langchain-community faiss-cpu sentence-transformers"
         }), 200
@@ -151,7 +205,7 @@ def chat():
 
     try:
         if chat_type == "analysis":
-            response = chat_with_analysis(
+            response = _chat_with_analysis(
                 question=question,
                 exercise_name=data.get("exercise_name", ""),
                 confidence=float(data.get("confidence", 0)),
@@ -161,7 +215,7 @@ def chat():
                 user_name=user_name,
             )
         else:
-            response = chat_general(
+            response = _chat_general(
                 question=question,
                 language=language,
                 user_name=user_name,
@@ -187,6 +241,7 @@ def recommend():
     equip   = data.get("equipment_list", ["no equipment"])
 
     try:
+        from recommend import get_recommendations, EXERCISES_DB, LANG
         recs   = get_recommendations(
             goal_en=goal, level_en=level,
             target_muscles=muscles, equipment_list=equip, n=6,
@@ -214,13 +269,14 @@ if __name__ == "__main__":
     print("=" * 50)
     print("🏋️   Smart Gym AI - Python API Server")
     print("=" * 50)
-    print(f"✅ Models loaded: {MODELS_LOADED}")
-    print(f"✅ RAG loaded:    {RAG_LOADED}")
     print(f"🌐 Running on:    http://localhost:{port}")
     print(f"📡 Endpoints:")
     print(f"   GET  /api/health")
+    print(f"   GET  /api/warmup  ← call once after deploy to load models")
     print(f"   POST /api/analyze   (multipart video)")
     print(f"   POST /api/chat      (RAG chat)")
     print(f"   POST /api/recommend (json)")
+    print("=" * 50)
+    print("⚡ Models load lazily on first request (low-memory mode)")
     print("=" * 50)
     app.run(host="0.0.0.0", port=port, debug=False)
