@@ -239,7 +239,8 @@ export default function Settings() {
           await refetch();
           setSaveMsg(language === "de" ? "✅ Konto erstellt!" : language === "ar" ? "✅ تم إنشاء الحساب!" : "✅ Account created!"); 
           try {
-            await fetch("http://localhost:5678/webhook/register-success", {
+            const n8nBase = import.meta.env.VITE_N8N_BASE_URL || "http://localhost:5678";
+            await fetch(`${n8nBase}/webhook/register-success`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

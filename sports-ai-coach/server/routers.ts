@@ -127,7 +127,8 @@ export const appRouter = router({
           const userEmail = userRow[0]?.email ?? "";
           const userName  = userRow[0]?.name  ?? "User";
 
-          await fetch("http://localhost:5678/webhook-test/gym-analysis", {
+          const n8nBase = process.env.N8N_BASE_URL || "http://localhost:5678";
+          await fetch(`${n8nBase}/webhook/gym-analysis`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
