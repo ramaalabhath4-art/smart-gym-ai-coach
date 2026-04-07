@@ -15,7 +15,12 @@ export async function getDb() {
     }
     try {
       const mysql2 = await import("mysql2/promise");
-      const connection = await mysql2.createConnection(url);
+      // PlanetScale (psdb.cloud) requires SSL — enable it automatically
+      const isPlanetScale = url.includes("psdb.cloud");
+      const connection = await mysql2.createConnection({
+        uri: url,
+        ...(isPlanetScale && { ssl: { rejectUnauthorized: true } }),
+      });
       _db = drizzle(connection as any);
       console.log("[Database] Connected successfully ✅");
     } catch (error) {
