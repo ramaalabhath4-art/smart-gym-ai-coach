@@ -1,0 +1,36 @@
+# render.yaml — Smart Gym AI Coach deployment on Render.com
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── Python AI Backend ────────────────────────────────────────────────────────
+  - type: web
+    name: smart-gym-python-api
+    runtime: python
+    buildCommand: pip install -r coach_ai/requirements.txt
+    startCommand: gunicorn --chdir coach_ai api_server:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    plan: free
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # Set manually in Render dashboard
+      - key: PORT
+        value: 10000
+      - key: PYTHON_ENV
+        value: production
+
+  # ── Node.js Full-Stack Frontend (Express + Vite) ──────────────────────────────
+  - type: web
+    name: smart-gym-frontend
+    runtime: node
+    rootDir: sports-ai-coach
+    buildCommand: npm install -g pnpm && pnpm install && pnpm build
+    startCommand: pnpm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false          # Set manually: mysql://user:pass@host/coach_ai
+      - key: JWT_SECRET
+        sync: false          # Set manually: random 32-char secret
+      - key: PYTHON_API_URL
+        sync: false          # Set to: https://smart-gym-python-api.onrender.com
