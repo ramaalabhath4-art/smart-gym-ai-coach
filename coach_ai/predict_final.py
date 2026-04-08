@@ -10,7 +10,7 @@ from mediapipe.tasks.python import vision
 import pathlib
 os.chdir(pathlib.Path(__file__).parent)
 
-model   = load_model("model_lstm_final.keras")
+model = load_model("model_lstm_final.keras", compile=False)
 scaler  = joblib.load("scaler.pkl")
 encoder = joblib.load("encoder.pkl")
 actions = list(encoder.classes_)
