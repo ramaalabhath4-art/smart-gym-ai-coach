@@ -40,7 +40,7 @@ queryClient.getMutationCache().subscribe(event => {
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: `${import.meta.env.VITE_SERVER_URL || ""}/api/trpc`,
+      url: `${import.meta.env.VITE_SERVER_URL ?? "https://smart-gym-ai-coach-server.onrender.com"}/api/trpc`,
       transformer: superjson,
       fetch(input, init) {
         return globalThis.fetch(input, {
