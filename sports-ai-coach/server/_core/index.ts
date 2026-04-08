@@ -48,6 +48,9 @@ async function startServer() {
     })
   );
   // development mode uses Vite, production mode uses static files
+  app.get("/health", (_req, res) => {
+    res.json({ status: "ok" });
+  });
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
