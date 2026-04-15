@@ -6,11 +6,11 @@
   "rewrites": [
     {
       "source": "/trpc/:path*",
-      "destination": "https://smart-gym-frontend.onrender.com/trpc/:path*"
+      "destination": "https://smart-gym-ai-coach-production.up.railway.app/trpc/:path*"
     },
     {
       "source": "/api/:path*",
-      "destination": "https://smart-gym-frontend.onrender.com/api/:path*"
+      "destination": "https://smart-gym-ai-coach-production.up.railway.app/api/:path*"
     },
     {
       "source": "/(.*)",
