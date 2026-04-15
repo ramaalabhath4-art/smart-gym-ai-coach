@@ -43,7 +43,6 @@ const CORRECTION_TRANSLATIONS: Record<string, Record<string, string>> = {
   "⚠️ ارفع الذراعين أعلى - نطاق حركة كامل":          { en: "⚠️ Raise arms higher — full range of motion",             fr: "⚠️ Levez les bras plus haut", de: "⚠️ Arme höher heben",          es: "⚠️ Levanta los brazos más",      zh: "⚠️ 手臂举得更高" },
   "⚠️ اسحب أكثر لأسفل - نطاق حركة كامل":            { en: "⚠️ Pull down more — full range of motion",                fr: "⚠️ Tirez davantage vers le bas", de: "⚠️ Weiter nach unten ziehen", es: "⚠️ Tira más hacia abajo",       zh: "⚠️ 向下拉得更多" },
   "✅ الأداء صحيح! استمر":                           { en: "✅ Great form! Keep it up",                                fr: "✅ Bonne forme! Continuez",   de: "✅ Gute Form! Weiter so",       es: "✅ ¡Buena forma! Sigue así",     zh: "✅ 动作正确！继续" },
-  // ================== VIDEO QUALITY ==================
   "⚠️ الكاميرا تتحرك - ثبّت الكاميرا على حامل":    { en: "⚠️ Camera is moving — use a tripod",                     fr: "⚠️ Caméra bouge — utilisez un trépied", de: "⚠️ Kamera bewegt sich — Stativ verwenden", es: "⚠️ Cámara en movimiento — use trípode", zh: "⚠️ 相机在移动——使用三脚架" },
   "⚠️ الحركة غير منتظمة - كرر التمرين بشكل صحيح":  { en: "⚠️ Irregular movement — repeat exercise correctly",        fr: "⚠️ Mouvement irrégulier",    de: "⚠️ Unregelmäßige Bewegung",    es: "⚠️ Movimiento irregular",       zh: "⚠️ 动作不规律" },
   "⚠️ الإضاءة ضعيفة - تأكد من الإضاءة الجيدة":     { en: "⚠️ Poor lighting — ensure good lighting",                 fr: "⚠️ Mauvais éclairage",       de: "⚠️ Schlechte Beleuchtung",     es: "⚠️ Iluminación deficiente",     zh: "⚠️ 光线不足" },
@@ -102,6 +101,7 @@ export const appRouter = router({
       }),
 
     me: publicProcedure.query(opts => opts.ctx.user),
+
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
@@ -117,33 +117,10 @@ export const appRouter = router({
         if (!ctx.user) return { success: false, error: "not_authenticated" };
         const db = await getDb();
         if (!db) return { success: false, error: "db_unavailable" };
+
         await db.update(users)
           .set({ name: input.name, email: input.email })
           .where(eq(users.id, ctx.user.id));
-        // إرسال إشعار لـ n8n
-        try {
-          const userRow = await db.select({ email: users.email, name: users.name })
-            .from(users).where(eq(users.id, input.userId)).limit(1);
-          const userEmail = userRow[0]?.email ?? "";
-          const userName  = userRow[0]?.name  ?? "User";
-
-          const n8nBase = process.env.N8N_BASE_URL || "http://localhost:5678";
-          await fetch(`${n8nBase}/webhook/gym-analysis`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              userId:    input.userId,
-              exercise:  input.exercise,
-              level:     input.level ?? null,
-              userEmail,
-              userName,
-              timestamp: new Date().toISOString(),
-            }),
-            signal: AbortSignal.timeout(3000),
-          });
-        } catch (e) {
-          console.error("[n8n] webhook error:", e);
-        }
 
         return { success: true };
       }),
@@ -164,7 +141,6 @@ export const appRouter = router({
             .set(updateData)
             .where(eq(users.id, ctx.user.id));
         } else if (input.email) {
-          // تحقق إذا الإيميل مسجل مسبقاً
           const existing = await db.select().from(users)
             .where(eq(users.email, input.email)).limit(1);
           if (existing.length > 0 && existing[0].subscription === input.plan) {
@@ -191,7 +167,6 @@ export const appRouter = router({
 
   analysis: router({
 
-    // ================== حفظ نتيجة التحليل ==================
     saveAnalysis: publicProcedure
       .input(z.object({
         userId:        z.number(),
@@ -225,7 +200,6 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    // ================== HEALTH CHECK للـ Python API ==================
     checkPythonApi: publicProcedure.query(async () => {
       try {
         const res = await fetch(`${PYTHON_API}/api/health`, { signal: AbortSignal.timeout(3000) });
@@ -236,7 +210,6 @@ export const appRouter = router({
       }
     }),
 
-    // ================== تحليل الفيديو الحقيقي ==================
     analyzeVideo: publicProcedure
       .input(z.object({
         videoBase64: z.string(),
@@ -271,7 +244,6 @@ export const appRouter = router({
         }
 
         if (pyResult.error) {
-          // ترجم رسالة الخطأ حسب اللغة
           const lang = input.language ?? "en";
           const errMsg = lang === "de" ? (pyResult.error_de ?? pyResult.error)
                        : lang === "ar" ? (pyResult.error_ar ?? pyResult.error)
@@ -279,7 +251,6 @@ export const appRouter = router({
           throw new Error(errMsg);
         }
 
-        // حفظ في قاعدة البيانات إذا كان المستخدم مسجل دخول
         if (input.userId) {
           try {
             const db = await getDb();
@@ -298,7 +269,6 @@ export const appRouter = router({
                 corrections:     JSON.stringify(corrections),
                 qualityIssues:   JSON.stringify(qualityIssues),
               });
-              // تحديث إحصائيات المستخدم
               await db.update(users)
                 .set({
                   totalSessions:  sql`${users.totalSessions}  + 1`,
@@ -308,7 +278,6 @@ export const appRouter = router({
             }
           } catch (dbErr) {
             console.error("[DB] فشل حفظ التحليل:", dbErr);
-            // لا نوقف النتيجة بسبب خطأ DB
           }
         }
 
@@ -325,7 +294,6 @@ export const appRouter = router({
         };
       }),
 
-    // ================== توصيات التمارين ==================
     getRecommendations: publicProcedure
       .input(z.object({
         goal_en:        z.string().default("fitness"),
@@ -348,7 +316,6 @@ export const appRouter = router({
         }
       }),
 
-    // ================== سجل التحليلات ==================
     getHistory: publicProcedure
       .input(z.object({ limit: z.number().default(20), userId: z.number().optional() }))
       .query(async ({ ctx, input }) => {
@@ -368,7 +335,6 @@ export const appRouter = router({
         }));
       }),
 
-    // ================== إحصائيات الداشبورد ==================
     getStats: publicProcedure
       .input(z.object({ userId: z.number().optional() }).optional())
       .query(async ({ ctx, input }) => {
@@ -380,7 +346,6 @@ export const appRouter = router({
         weeklyProgress: [], exerciseBreakdown: [],
       };
 
-      // Total sessions + avg score
       const [row] = await db
         .select({
           total:    count(analysisHistory.id),
@@ -389,7 +354,6 @@ export const appRouter = router({
         .from(analysisHistory)
         .where(eq(analysisHistory.userId, uid));
 
-      // Last 7 sessions for progress chart
       const last28 = await db
         .select({
           similarityScore: analysisHistory.similarityScore,
@@ -401,7 +365,6 @@ export const appRouter = router({
         .orderBy(desc(analysisHistory.createdAt))
         .limit(28);
 
-      // Group by week
       const weekMap = new Map<string, { scores: number[], exercise: string }>();
       last28.forEach(r => {
         const d = new Date(r.createdAt);
@@ -417,7 +380,6 @@ export const appRouter = router({
         exercise: data.exercise,
       }));
 
-      // إذا كل الـ scores = 0 → استخدم confidence
       const allZero = weeklyProgressData.every(r => r.score === 0);
       if (allZero) {
         const last28conf = await db
@@ -439,7 +401,6 @@ export const appRouter = router({
         });
       }
 
-      // Most practiced exercise
       const exerciseRows = await db
         .select({
           exercise: analysisHistory.exerciseClass,
@@ -452,7 +413,6 @@ export const appRouter = router({
         .orderBy(desc(count(analysisHistory.id)))
         .limit(5);
 
-      // Most common errors
       const errorRows = await db
         .select()
         .from(errorAnalytics)
@@ -479,7 +439,6 @@ export const appRouter = router({
       };
     }),
 
-    // ================== RAG Chat ==================
     chat: publicProcedure
       .input(
         z.object({
@@ -528,13 +487,11 @@ export const appRouter = router({
     getMessages: protectedProcedure.query(async ({ ctx }) => {
       const db = await getDb();
       if (!db) return [];
-
       const result = await db
         .select()
         .from(messages)
         .orderBy(desc(messages.createdAt))
         .limit(50);
-
       return result.reverse().map(msg => ({
         ...msg,
         userName: "User",
@@ -546,12 +503,10 @@ export const appRouter = router({
       .mutation(async ({ input, ctx }) => {
         const db = await getDb();
         if (!db || !ctx.user) throw new Error("Database or user not available");
-
         await db.insert(messages).values({
           userId: ctx.user.id,
           content: input.content,
         });
-
         return {
           id: Math.random(),
           userId: ctx.user.id,
@@ -582,7 +537,6 @@ export const appRouter = router({
       .query(async ({ ctx }) => {
         const account = await getPaymentAccount(ctx.user.id);
         if (!account) return null;
-        
         return {
           id: account.id,
           cardholderName: account.cardholderName,
@@ -618,7 +572,6 @@ export const appRouter = router({
         if (!account) {
           return { success: false, message: "No payment account found" };
         }
-
         await sendPaymentNotificationEmail({
           cardholderName: account.cardholderName,
           lastFourDigits: account.lastFourDigits,
@@ -627,7 +580,6 @@ export const appRouter = router({
           userEmail: ctx.user.email || undefined,
           timestamp: new Date(),
         });
-
         return {
           success: true,
           message: input.enabled ? "Auto-renewal enabled" : "Auto-renewal disabled",
@@ -635,10 +587,7 @@ export const appRouter = router({
       }),
   }),
 
-  // ================== RESULTS CHAT ==================
   resultsChat: router({
-
-    // Save message from inner chat (AnalysisResult page)
     save: publicProcedure
       .input(z.object({
         analysisId:  z.number().optional(),
@@ -668,7 +617,6 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    // Get results chat history for a user
     getHistory: protectedProcedure
       .input(z.object({ limit: z.number().default(20) }))
       .query(async ({ ctx, input }) => {
@@ -683,10 +631,7 @@ export const appRouter = router({
       }),
   }),
 
-  // ================== GENERAL CHAT ==================
   generalChat: router({
-
-    // Save message from outer chat (AdvancedAnalysis page)
     save: protectedProcedure
       .input(z.object({
         sessionId:   z.string(),
@@ -709,7 +654,6 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    // Get general chat history
     getHistory: protectedProcedure
       .input(z.object({ limit: z.number().default(50) }))
       .query(async ({ ctx, input }) => {
@@ -723,7 +667,6 @@ export const appRouter = router({
           .limit(input.limit);
       }),
 
-    // Get sessions list
     getSessions: protectedProcedure.query(async ({ ctx }) => {
       const db = await getDb();
       if (!db || !ctx.user) return [];
@@ -732,7 +675,6 @@ export const appRouter = router({
         .from(generalChat)
         .where(eq(generalChat.userId, ctx.user.id))
         .orderBy(desc(generalChat.createdAt));
-      // Group by sessionId
       const sessions: Record<string, any> = {};
       for (const row of rows) {
         if (!sessions[row.sessionId ?? ""]) {
@@ -749,10 +691,7 @@ export const appRouter = router({
     }),
   }),
 
-  // ================== ERROR ANALYTICS ==================
   errorAnalytics: router({
-
-    // Save errors from analysis (called internally)
     saveErrors: protectedProcedure
       .input(z.object({
         exercise:   z.string(),
@@ -762,14 +701,11 @@ export const appRouter = router({
         const db = await getDb();
         if (!db || !ctx.user) return { success: false };
         for (const errorText of input.corrections) {
-          if (errorText.includes("✅")) continue; // Skip positive feedback
-          // Check if error exists
+          if (errorText.includes("✅")) continue;
           const existing = await db
             .select()
             .from(errorAnalytics)
-            .where(
-              eq(errorAnalytics.userId,    ctx.user.id),
-            )
+            .where(eq(errorAnalytics.userId, ctx.user.id))
             .limit(1);
           if (existing.length > 0) {
             await db.update(errorAnalytics)
@@ -790,7 +726,6 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    // Get user's most common errors
     getMyErrors: protectedProcedure
       .input(z.object({ limit: z.number().default(5) }))
       .query(async ({ ctx, input }) => {
