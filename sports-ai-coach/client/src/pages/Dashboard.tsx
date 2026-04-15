@@ -42,12 +42,12 @@ export default function Dashboard() {
   );
 
   const { data: chatSessions } = trpc.generalChat.getSessions.useQuery(undefined, {
-    enabled: !!user && showChatHistory,
+    enabled: !!effectiveUserId && showChatHistory,
   });
 
   const { data: myErrors } = trpc.errorAnalytics.getMyErrors.useQuery(
     { limit: 5 },
-    { enabled: !!user }
+    { enabled: !!effectiveUserId }
   );
 
   const recentAnalysis    = historyData ?? [];

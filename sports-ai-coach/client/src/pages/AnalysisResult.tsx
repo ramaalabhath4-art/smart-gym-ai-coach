@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Trophy, AlertTriangle, CheckCircle, Activity, Download, Save } from "lucide-react";
@@ -51,7 +52,7 @@ export default function AnalysisResult() {
 
   const chatMutation    = trpc.analysis.chat.useMutation();
   const saveResultsChat = trpc.resultsChat.save.useMutation();
-  const { data: authUser } = trpc.auth.me.useQuery();
+  const { user: authUser } = useAuth();
 
   // Get username from auth or localStorage
   const storedName = (() => { try { return localStorage.getItem("userName") || null; } catch { return null; } })();

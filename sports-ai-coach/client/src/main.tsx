@@ -37,10 +37,13 @@ queryClient.getMutationCache().subscribe(event => {
   }
 });
 
+// Use relative URL so all tRPC requests go through Vercel's proxy (/api/trpc → Railway).
+// This keeps cookies on the same domain (vercel.app) and avoids cross-domain cookie issues.
+// In local dev, Express serves both frontend and API on the same port, so relative URL works too.
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: `${import.meta.env.VITE_SERVER_URL ?? "https://smart-gym-ai-coach-production.up.railway.app"}/api/trpc`,
+      url: "/api/trpc",
       transformer: superjson,
       fetch(input, init) {
         return globalThis.fetch(input, {

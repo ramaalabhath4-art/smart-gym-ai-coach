@@ -8,6 +8,17 @@ type UseAuthOptions = {
   redirectPath?: string;
 };
 
+function getStoredUser() {
+  try {
+    const id  = localStorage.getItem("userId");
+    const name = localStorage.getItem("userName");
+    if (!id) return null;
+    return { id: parseInt(id), name: name ?? "", email: "" };
+  } catch {
+    return null;
+  }
+}
+
 export function useAuth(options?: UseAuthOptions) {
   const { redirectOnUnauthenticated = false, redirectPath = getLoginUrl() } =
     options ?? {};
@@ -36,21 +47,32 @@ export function useAuth(options?: UseAuthOptions) {
       }
       throw error;
     } finally {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userName");
       utils.auth.me.setData(undefined, null);
       await utils.auth.me.invalidate();
     }
   }, [logoutMutation, utils]);
 
   const state = useMemo(() => {
-    localStorage.setItem(
-      "manus-runtime-user-info",
-      JSON.stringify(meQuery.data)
-    );
+    // Persist user info to localStorage when cookie auth succeeds
+    const serverUser = meQuery.data ?? null;
+    if (serverUser) {
+      try {
+        localStorage.setItem("userId",   String(serverUser.id));
+        localStorage.setItem("userName", serverUser.name ?? "");
+        localStorage.setItem("manus-runtime-user-info", JSON.stringify(serverUser));
+      } catch {}
+    }
+
+    // Fall back to localStorage when cookie auth fails (cross-domain deploy)
+    const user = serverUser ?? (!meQuery.isLoading ? getStoredUser() : null);
+
     return {
-      user: meQuery.data ?? null,
+      user,
       loading: meQuery.isLoading || logoutMutation.isPending,
       error: meQuery.error ?? logoutMutation.error ?? null,
-      isAuthenticated: Boolean(meQuery.data),
+      isAuthenticated: Boolean(user),
     };
   }, [
     meQuery.data,
@@ -67,7 +89,7 @@ export function useAuth(options?: UseAuthOptions) {
     if (typeof window === "undefined") return;
     if (window.location.pathname === redirectPath) return;
 
-    window.location.href = redirectPath
+    window.location.href = redirectPath;
   }, [
     redirectOnUnauthenticated,
     redirectPath,
