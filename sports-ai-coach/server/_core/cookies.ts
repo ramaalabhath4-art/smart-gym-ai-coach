@@ -24,11 +24,11 @@ function isSecureRequest(req: Request) {
 export function getSessionCookieOptions(
   req: Request
 ): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
-   const secure = isSecureRequest(req);
-  return {
+   return {
     httpOnly: true,
     path: "/",
-    sameSite: secure ? "none" : "lax",
-    secure: secure,
+    sameSite: "none",
+    secure: true,
   };
+   
 }
