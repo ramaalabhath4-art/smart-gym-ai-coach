@@ -35,11 +35,25 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
+  const allowedOrigins = (process.env.FRONTEND_URL || "")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+
   app.use(cors({
-    origin: [
-      "https://smart-gym-ai-coach.vercel.app",
-      "http://localhost:3000",
-    ],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      // Allow localhost in any form
+      if (origin.startsWith("http://localhost") || origin.startsWith("http://127.0.0.1")) {
+        return callback(null, true);
+      }
+      // Allow all Vercel preview + production deployments
+      if (origin.endsWith(".vercel.app")) return callback(null, true);
+      // Allow explicitly listed origins
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      callback(new Error(`CORS: origin not allowed: ${origin}`));
+    },
     credentials: true,
   }));
 
