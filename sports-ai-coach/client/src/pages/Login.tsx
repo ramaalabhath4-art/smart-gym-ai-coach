@@ -46,6 +46,8 @@ export default function Login() {
       if (!res.ok) {
         setError(data.error || t("error"));
       } else {
+        if (data.user?.id)   localStorage.setItem("userId",   String(data.user.id));
+        if (data.user?.name) localStorage.setItem("userName", data.user.name);
         window.location.href = "/";
       }
     } catch {

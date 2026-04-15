@@ -325,6 +325,9 @@ export default function Settings() {
           alert(language === "de" ? "Falsches Passwort" : language === "ar" ? "كلمة المرور خاطئة" : "Wrong password");
           return;
         }
+        const loginData = await res.json();
+        if (loginData.user?.id)   localStorage.setItem("userId",   String(loginData.user.id));
+        if (loginData.user?.name) localStorage.setItem("userName", loginData.user.name);
         await refetch();
         setSelectedPlan("free");
         setShowEmailModal(false);
@@ -360,6 +363,9 @@ export default function Settings() {
         alert(err.error);
         return;
       }
+      const regData = await res.json();
+      if (regData.user?.id)   localStorage.setItem("userId",   String(regData.user.id));
+      if (regData.user?.name) localStorage.setItem("userName", regData.user.name);
       await refetch();
       setSelectedPlan("free");
       setShowEmailModal(false);
