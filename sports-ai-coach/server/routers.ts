@@ -202,7 +202,7 @@ export const appRouter = router({
 
     checkPythonApi: publicProcedure.query(async () => {
       try {
-        const res = await fetch(`${PYTHON_API}/api/health`, { signal: AbortSignal.timeout(3000) });
+        const res = await fetch(`${PYTHON_API}/api/health`, { signal: AbortSignal.timeout(180000) });
         const data = await res.json();
         return { online: true, modelsLoaded: data.models_loaded ?? false };
       } catch {
