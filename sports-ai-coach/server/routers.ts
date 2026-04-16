@@ -236,7 +236,7 @@ export const appRouter = router({
             method:  "POST",
             headers: { "Content-Type": `multipart/form-data; boundary=${boundary}` },
             body:    body,
-            signal:  AbortSignal.timeout(60000),
+            signal:  AbortSignal.timeout(180000),
           });
           pyResult = await res.json();
         } catch (err: any) {
